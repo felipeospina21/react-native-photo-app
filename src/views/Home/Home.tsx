@@ -1,16 +1,19 @@
 import home from '@assets/home-bg.png';
-import girl from '@assets/home-girl.png';
+import { useNavigation } from '@react-navigation/native';
+import { PrimaryButton } from '@shared';
 import { useFonts } from 'expo-font';
 import * as SplashScreen from 'expo-splash-screen';
 import { useCallback } from 'react';
-import { Image, ImageBackground, StatusBar, View } from 'react-native';
-import { GenderButtons, HomeTitle, MenuSvg } from './components';
+import { ImageBackground, StatusBar, Text, View } from 'react-native';
+import type { ProfileScreenNavigationProp } from '@App'
 
 SplashScreen.preventAutoHideAsync();
 
 export function Home() {
+  const { navigate } = useNavigation<ProfileScreenNavigationProp>()
   const [fontsLoaded] = useFonts({
-    'Porter-Sans': require('@assets/fonts/porter-sans-inline-block.otf'),
+    main: require('@assets/fonts/Jua-Regular.ttf'),
+    secondary: require('@assets/fonts/Kalam-Regular.ttf'),
   });
 
   const onLayoutRootView = useCallback(async () => {
@@ -24,18 +27,18 @@ export function Home() {
   }
 
   return (
-    <ImageBackground source={home} onLayout={onLayoutRootView}>
+    <ImageBackground source={home} onLayout={onLayoutRootView} className="h-full flex justify-end">
       <StatusBar />
-      <View className="flex items-center justify-end h-full">
-        <View className="mb-[-42px]">
-          <Image source={girl} accessibilityIgnoresInvertColors />
-        </View>
-
-        <View className="flex items-center w-full justify-evenly h-1/3 ">
-          <MenuSvg />
-          <HomeTitle />
-          <GenderButtons />
-        </View>
+      <View className="flex items-center justify-center h-1/3 rounded-t-[30px] bg-bg-dark_glass">
+        <Text className="font-main text-white text-4xl">Photo Search</Text>
+        <Text className="font-secondary text-white text-lg mb-6">
+          find your best photograph in the city
+        </Text>
+        <PrimaryButton
+          text="Search"
+          onPress={()=>navigate('Main')}
+          a11y={{ accessibilityHint: 'click to search photos', accessibilityLabel: 'search' }}
+        />
       </View>
     </ImageBackground>
   );

@@ -5,7 +5,7 @@ module.exports = {
     extend: {
       colors: {
         button:{
-          primary: 'rgba(43, 15, 90, 0.9)',
+          primary: '#AB7E57',
         },
         border: {
           light: '#A79FE1',
@@ -13,11 +13,16 @@ module.exports = {
         },
         bg:{
           purple: 'rgba(70, 47, 153, 0.6)',
-          gray: 'rgba(187, 184, 222, 1)'
+          gray: 'rgba(187, 184, 222, 1)',
+          dark_glass: 'rgba(55, 51, 52, 0.7)',
+          brown_light: '#F4DFCA'
+        },
+        text: {
+          main: '#3A3636',
+          secondary: '#AB7E57'
         },
         dark_bg: '#110115',
         light_bg: '#ffffff',
-        dark_glass: 'rgba(17, 1, 21, 0.5)',
         light_glass: 'rgba(255, 255, 255, 0.7)',
         text_secondary: '#F4EEB2',
         text_primary: '#3E0B82',
@@ -27,7 +32,8 @@ module.exports = {
         }
       },
       fontFamily: {
-        porterSans: ['Porter-Sans']
+        main: ['main'],
+        secondary: ['secondary'],
       }
     },
   },

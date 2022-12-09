@@ -1,13 +1,12 @@
 import { NavigationContainer } from '@react-navigation/native';
 import { createNativeStackNavigator, NativeStackScreenProps } from '@react-navigation/native-stack';
-import { Home, Man, Woman } from '@views';
+import { Home, MainView } from '@views';
 import { registerRootComponent } from 'expo';
 
 export type RootStackParamList = {
   Home: undefined;
-  Woman: undefined;
-  Man: undefined;
-  Other: undefined;
+  Main: undefined;
+  Map: undefined;
 };
 
 const Stack = createNativeStackNavigator<RootStackParamList>();
@@ -20,8 +19,7 @@ function App() {
     <NavigationContainer>
       <Stack.Navigator initialRouteName="Home" screenOptions={{ headerShown: false }}>
         <Stack.Screen name="Home" component={Home} />
-        <Stack.Screen name="Woman" component={Woman} />
-        <Stack.Screen name="Man" component={Man} />
+        <Stack.Screen name="Main" component={MainView} />
       </Stack.Navigator>
     </NavigationContainer>
   );

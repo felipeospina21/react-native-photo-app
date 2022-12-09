@@ -1,2 +1,2 @@
-export * from './Character/CharacterLayout';
-export * from './Character/types';
+export * from './Character';
+export * from './Primary';
