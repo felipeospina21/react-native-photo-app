@@ -15,7 +15,8 @@ module.exports = {
           purple: 'rgba(70, 47, 153, 0.6)',
           gray: 'rgba(187, 184, 222, 1)',
           dark_glass: 'rgba(55, 51, 52, 0.7)',
-          brown_light: '#F4DFCA'
+          brown_light: '#F4DFCA',
+          brown_dark: '#6E5744'
         },
         text: {
           main: '#3A3636',
@@ -34,6 +35,7 @@ module.exports = {
       fontFamily: {
         main: ['main'],
         secondary: ['secondary'],
+        secondary_bold: ['secondary_bold']
       }
     },
   },

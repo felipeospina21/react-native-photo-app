@@ -1,22 +1,19 @@
 import { axiosQueryFn } from '@utils';
 import { useQuery } from 'react-query';
-import type { Collections } from '../types'
+import type { Topics } from '../types'
 import Constants from 'expo-constants'
 
 const API_ACCESS_KEY = Constants.expoConfig?.extra?.apiAccessKey
 
-export function getCollections() {
+export function getTopics() {
   return useQuery({
-    queryKey: ['collections'],
+    queryKey: ['topics'],
     queryFn: ({ signal }) =>
-      axiosQueryFn<Collections[]>({
+      axiosQueryFn<Topics[]>({
         baseURL: 'https://api.unsplash.com',
-        url: '/collections',
+        url: `/topics`,
         headers: {
           Authorization: `Client-ID ${API_ACCESS_KEY}`,
-        },
-        params:{
-          page: 2,
         },
         signal,
       }),

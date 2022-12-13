@@ -14,6 +14,7 @@ export function Home() {
   const [fontsLoaded] = useFonts({
     main: require('@assets/fonts/Jua-Regular.ttf'),
     secondary: require('@assets/fonts/Kalam-Regular.ttf'),
+    secondary_bold: require('@assets/fonts/Kalam-Bold.ttf'),
   });
 
   const onLayoutRootView = useCallback(async () => {

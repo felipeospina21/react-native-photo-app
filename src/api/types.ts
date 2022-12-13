@@ -112,3 +112,33 @@ export interface Topics {
     }[];
   };
 }
+
+export interface Photos {
+  id: string;
+  updated_at: string;
+  description: string;
+  alt_description:string;
+  created_at: string;
+  width: number;
+  height: number;
+  color: string;
+  blur_hash: string;
+  likes: number;
+  liked_by_user: boolean;
+  user: User;
+  current_user_collections: // The *current user's* collections that this photo belongs to.
+  {
+    id: number;
+    title: string;
+    published_at: string;
+    last_collected_at: string;
+    updated_at: string;
+    cover_photo: null | string;
+    user: null | string;
+  }[];
+  urls: Urls;
+  links: Links & {
+    download: string;
+    download_location: string;
+  };
+}

@@ -3,7 +3,7 @@ import LogoImg from '@assets/logo.png';
 
 export function Header() {
   return (
-    <View className="h-12 flex-row justify-start">
+    <View className="h-14 flex-row justify-start items-center bg-white">
       <View className="h-10 flex-row items-center justify-around w-1/2">
         <Image
           source={LogoImg}
