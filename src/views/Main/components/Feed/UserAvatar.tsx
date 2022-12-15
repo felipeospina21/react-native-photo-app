@@ -1,4 +1,5 @@
 import { ImageBackground, Text, View } from 'react-native';
+import { calcPublishingTimeInHours, formatPublishingTime, formatUserLocation } from '../../../../utils/feed/feedUtils';
 
 interface UserAvatarProps {
   img: string;
@@ -8,23 +9,7 @@ interface UserAvatarProps {
 }
 
 export function UserAvatar({ img, name, createdAt, userLocation }: UserAvatarProps) {
-  function calcPublishingTimeInHours() {
-    const now = new Date();
-    const creationDate = new Date(createdAt);
-    const hoursAgo = (now.getTime() - creationDate.getTime()) / (1000 * 60 * 60);
-    return Math.floor(hoursAgo);
-  }
-
-  function formatPublishingTime(hours: number) {
-    if (hours > 24) return `${Math.floor(hours / 24)} days`;
-    return `${hours} hours`;
-  }
-
-  function formatUserLocation(location: string | null) {
-    return location ? `at ${userLocation}` : '';
-  }
-
-  const published = calcPublishingTimeInHours();
+  const published = calcPublishingTimeInHours(createdAt);
   const formatedPublishingTime = formatPublishingTime(published);
   const formatedLocation = formatUserLocation(userLocation);
   const publishedAt = `${formatedPublishingTime} ago ${formatedLocation}`;

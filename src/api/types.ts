@@ -142,3 +142,14 @@ export interface Photos {
     download_location: string;
   };
 }
+
+interface QueryResponse {
+  total: number;
+  total_pages: number;
+}
+
+export interface PhotosQuery extends QueryResponse {
+  results: Photos[]
+}
+
+

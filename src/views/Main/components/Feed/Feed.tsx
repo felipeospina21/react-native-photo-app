@@ -1,15 +1,17 @@
 import { getPhotos } from '@api';
+import { useStore } from '@zustandStore';
 import { FlatList, Text, View } from 'react-native';
 import { FeedCard } from './FeedCard';
 
 export function Feed() {
-  const { data } = getPhotos();
+  const [topic] = useStore(state => state.topic)
+  const { data } = getPhotos(topic);
   return (
     <View>
       <Text className="font-secondary_bold text-lg ml-6 mt-2">Activity Feed</Text>
       <FlatList
         className="mb-14"
-        data={data?.data}
+        data={data?.data.results}
         renderItem={({ item }) => <FeedCard data={item} />}
         keyExtractor={(item) => item.id}
       />
