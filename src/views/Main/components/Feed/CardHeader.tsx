@@ -1,14 +1,14 @@
 import { ImageBackground, Text, View } from 'react-native';
-import { calcPublishingTimeInHours, formatPublishingTime, formatUserLocation } from '../../../../utils/feed/feedUtils';
+import { calcPublishingTimeInHours, formatPublishingTime, formatUserLocation } from '@utils';
 
-interface UserAvatarProps {
+interface CardHeaderProps {
   img: string;
   name: string;
   createdAt: string;
   userLocation: string;
 }
 
-export function UserAvatar({ img, name, createdAt, userLocation }: UserAvatarProps) {
+export function CardHeader({ img, name, createdAt, userLocation }: CardHeaderProps) {
   const published = calcPublishingTimeInHours(createdAt);
   const formatedPublishingTime = formatPublishingTime(published);
   const formatedLocation = formatUserLocation(userLocation);

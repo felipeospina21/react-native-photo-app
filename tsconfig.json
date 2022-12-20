@@ -6,7 +6,7 @@
     "paths": {
       "@assets": ["assets"],
       "@App": ["src/App.tsx"],
-      "@shared": ["src/shared/index"],
+      "@components": ["src/components/index"],
       "@views": ["src/views/index"],
       "@zustandStore": ["src/zustand/index"],
       "@hooks": ["src/hooks/index"],

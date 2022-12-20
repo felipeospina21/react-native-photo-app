@@ -1,6 +1,6 @@
 import home from '@assets/home-bg.png';
 import { useNavigation } from '@react-navigation/native';
-import { PrimaryButton } from '@shared';
+import { PrimaryButton } from '@components';
 import { useFonts } from 'expo-font';
 import * as SplashScreen from 'expo-splash-screen';
 import { useCallback } from 'react';

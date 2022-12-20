@@ -1,6 +1,6 @@
 import type { Photos } from '@api';
 import { ImageBackground, Text, View } from 'react-native';
-import { UserAvatar } from './UserAvatar';
+import { CardHeader } from './CardHeader';
 
 interface FeedCardProps {
   data: Photos;
@@ -11,7 +11,7 @@ export function FeedCard({ data }: FeedCardProps) {
   const imgDescription = description ?? alt_description
   return (
     <View className="bg-white py-2">
-      <UserAvatar
+      <CardHeader
         img={user.profile_image.small}
         name={user.name}
         createdAt={created_at}

@@ -10,7 +10,7 @@ module.exports = function (api) {
           alias: {
             '@assets': './assets',
             '@App': './src/App.tsx',
-            '@shared': './src/shared',
+            '@components': './src/components',
             '@views': './src/views',
             '@zustandStore': './src/zustand/index',
             '@hooks': './src/hooks/index',
