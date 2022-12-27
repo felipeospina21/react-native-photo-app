@@ -1,17 +1,18 @@
 import { SecondaryButton } from '@components';
 import { PhotoMock } from '@mocks';
 import { useStore } from '@zustandStore';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { Modal, Pressable, Text, TextInput, View } from 'react-native';
 
 interface EditModalProps {
   isShown: boolean;
-  photo: PhotoMock;
+  photo: PhotoMock | null;
   setVisibility: React.Dispatch<React.SetStateAction<boolean>>;
 }
 
 export function EditModal({ photo, isShown, setVisibility }: EditModalProps) {
-  const [updatedTitle, setUpdatedTitle] = useState(photo.title);
+  const INIT_TITLE = photo ? photo.title : ''
+  const [updatedTitle, setUpdatedTitle] = useState(INIT_TITLE);
   const [editPhoto] = useStore((state) => [state.editPhoto]);
 
   function handleTextChange(text: string) {
@@ -19,9 +20,15 @@ export function EditModal({ photo, isShown, setVisibility }: EditModalProps) {
   }
 
   function handleSave() {
-    editPhoto(photo.id, updatedTitle);
-    setVisibility(false);
+    if(photo){
+      editPhoto(photo.id, updatedTitle);
+      setVisibility(false);
+    }
   }
+
+ useEffect(() => {
+  setUpdatedTitle(INIT_TITLE)
+ },[isShown])
 
   return (
     <Modal

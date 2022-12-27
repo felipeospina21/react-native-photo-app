@@ -22,7 +22,7 @@ export function CameraView() {
       addPhoto({
         title: 'new Photo',
         id: uuidv4(),
-        url: 'https://images.unsplash.com/photo-1671415366359-393861a1f57e?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHx0b3BpYy1mZWVkfDF8RnpvM3p1T0hONnd8fGVufDB8fHx8&auto=format&fit=crop&w=700&q=60',
+        image: photo as CameraCapturedPicture
       });
     } else {
       console.log('not granted');

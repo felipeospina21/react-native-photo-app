@@ -1,22 +1,28 @@
+import { PhotoMock } from '@mocks';
 import { useStore } from '@zustandStore';
 import React, { useState } from 'react';
 import { FlatList, Text, View } from 'react-native';
 import { CollectionsPhoto } from './components';
 import { EditModal } from './components/EditModal';
 
+export interface HandleAction {
+  action: string;
+  id?: string;
+  photo?: PhotoMock;
+}
 export function PhotosCollection() {
   const [isEditModalVisible, setIsEditModalVisible] = useState(false);
-  const [photoIdToEdit, setPhotoIdToEdit] = useState('');
+  const [photoToEdit, setPhotoToEdit] = useState<PhotoMock | null>(null);
   const [photos, deletePhoto] = useStore((state) => [state.photos, state.deletePhoto]);
 
-  function handleAction(action: string, id?: string) {
+  function handleAction({ action, id, photo }: HandleAction) {
     switch (action) {
       case 'SHARE':
         sharePhoto();
         break;
 
       case 'EDIT':
-        editPhoto(id as string);
+        editPhoto(photo as PhotoMock);
         break;
 
       case 'DELETE':
@@ -31,32 +37,25 @@ export function PhotosCollection() {
     console.log('shared');
   }
 
-  function editPhoto(photoId: string) {
-    setPhotoIdToEdit(photoId);
+  function editPhoto(photo: PhotoMock) {
+    setPhotoToEdit(photo);
     setIsEditModalVisible(true);
-  }
-
-  function validateModalVisibility(isShown: boolean, photoId: string) {
-    return isShown && photoId === photoIdToEdit ? true : false;
   }
 
   return (
     <View className="bg-white h-4/5">
       <Text className="font-main text-center text-xl my-5">My Photos</Text>
       <FlatList
-        className='mb-20 h-full'
-        ListFooterComponent={<View className='h-14'/>}
+        className="mb-20 h-full"
+        ListFooterComponent={<View className="h-14" />}
         data={photos}
-        keyExtractor={(item)=>item.id}
-        renderItem={({ item }) => {
-          const isShown = validateModalVisibility(isEditModalVisible, item.id);
-          return (
-            <>
-              <CollectionsPhoto photo={item} handleAction={handleAction} />
-              <EditModal photo={item} isShown={isShown} setVisibility={setIsEditModalVisible} />
-            </>
-          );
-        }}
+        keyExtractor={(item) => item.id}
+        renderItem={({ item }) => <CollectionsPhoto photo={item} handleAction={handleAction} />}
+      />
+      <EditModal
+        photo={photoToEdit}
+        isShown={isEditModalVisible}
+        setVisibility={setIsEditModalVisible}
       />
     </View>
   );

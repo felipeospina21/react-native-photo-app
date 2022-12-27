@@ -1,12 +1,14 @@
 import deleteIcon from '@assets/icons/delete.png';
 import editIcon from '@assets/icons/editing.png';
 import shareIcon from '@assets/icons/share.png';
+import { PhotoMock } from '@mocks';
 import { useState } from 'react';
 import { Image, Pressable, Text, View, type ImageSourcePropType } from 'react-native';
+import type { HandleAction } from '../PhotosCollection'
 
 interface PhotoActionsProps {
-  photoId: string;
-  handleAction: (action:string, id?:string)=>void
+  photo: PhotoMock;
+  handleAction: ({ action, id, photo }: HandleAction)=>void
 }
 type Action = 'SHARE' | 'EDIT' | 'DELETE';
 interface Actions {
@@ -17,7 +19,7 @@ interface Actions {
   action: Action;
 }
 
-export function PhotoActions({ photoId, handleAction }: PhotoActionsProps) {
+export function PhotoActions({ photo, handleAction }: PhotoActionsProps) {
   const [actions] = useState<Actions[]>([
     {
       icon: shareIcon,
@@ -42,7 +44,6 @@ export function PhotoActions({ photoId, handleAction }: PhotoActionsProps) {
     },
   ]);
 
-
   return (
     <View className="flex-row justify-between w-4/5">
       {actions.map(({ icon, label, hint, text, action }, idx) => (
@@ -50,7 +51,7 @@ export function PhotoActions({ photoId, handleAction }: PhotoActionsProps) {
           key={idx}
           accessibilityLabel={label}
           accessibilityHint={hint}
-          onPress={() => handleAction(action, photoId)}
+          onPress={() => handleAction({ action, photo, id: photo.id })}
           className="w-1/4 h-8"
         >
           <View className="flex-row justify-between items-center">
