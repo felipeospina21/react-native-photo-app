@@ -2,8 +2,8 @@ import type { ProfileScreenNavigationProp, RootStackParamList } from '@App';
 import chat from '@assets/icons/chat.png';
 import home from '@assets/icons/home.png';
 import location from '@assets/icons/location.png';
-import bell from '@assets/icons/bell.png';
 import user from '@assets/icons/user.png';
+import camera from '@assets/icons/camera.png';
 import { useNavigation } from '@react-navigation/native';
 import { Image, Pressable, View, type ImageSourcePropType } from 'react-native';
 
@@ -12,8 +12,8 @@ export function NavBar() {
   const routes = [
     { route: 'Home', icon: home, label: 'home button', hint: 'navigate to home page' },
     { route: 'Location', icon: location, label: 'map button', hint: 'navigate to map page' },
+    { route: 'Camera', icon: camera, label: 'camera button', hint: 'navigate to camera page' },
     { route: 'Main', icon: chat, label: 'feed button', hint: 'navigate to feed page' },
-    { route: 'Home', icon: bell, label: 'home button', hint: 'navigate to home page' },
     { route: 'Profile', icon: user, label: 'home button', hint: 'navigate to home page' },
   ];
   return (

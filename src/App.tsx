@@ -1,6 +1,6 @@
 import { NavigationContainer } from '@react-navigation/native';
 import { createNativeStackNavigator, NativeStackScreenProps } from '@react-navigation/native-stack';
-import { Home, MainView, LocationView, ProfileView } from '@views';
+import { Home, MainView, LocationView, ProfileView, CameraView } from '@views';
 import { registerRootComponent } from 'expo';
 import { QueryClient, QueryClientProvider } from 'react-query';
 
@@ -9,6 +9,7 @@ export type RootStackParamList = {
   Main: undefined;
   Location: undefined;
   Profile: undefined;
+  Camera: undefined;
 };
 
 const Stack = createNativeStackNavigator<RootStackParamList>();
@@ -27,6 +28,7 @@ function App() {
           <Stack.Screen name="Main" component={MainView} />
           <Stack.Screen name="Location" component={LocationView} />
           <Stack.Screen name="Profile" component={ProfileView} />
+          <Stack.Screen name="Camera" component={CameraView} />
         </Stack.Navigator>
       </NavigationContainer>
     </QueryClientProvider>

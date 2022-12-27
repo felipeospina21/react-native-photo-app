@@ -1,20 +1,13 @@
-import type { PhotoMock, UserMock } from '@mocks';
-import React, { useEffect, useState } from 'react';
-import { Text, View } from 'react-native';
+import { useStore } from '@zustandStore';
+import React, { useState } from 'react';
+import { FlatList, Text, View } from 'react-native';
 import { CollectionsPhoto } from './components';
 import { EditModal } from './components/EditModal';
 
-interface PhotosCollectionProps {
-  user: UserMock;
-}
-
-export function PhotosCollection({ user }: PhotosCollectionProps) {
+export function PhotosCollection() {
   const [isEditModalVisible, setIsEditModalVisible] = useState(false);
   const [photoIdToEdit, setPhotoIdToEdit] = useState('');
-  const [photos, setPhotos] = useState<PhotoMock[]>([]);
-  useEffect(() => {
-    setPhotos(user.photos);
-  }, []);
+  const [photos, deletePhoto] = useStore((state) => [state.photos, state.deletePhoto]);
 
   function handleAction(action: string, id?: string) {
     switch (action) {
@@ -43,11 +36,6 @@ export function PhotosCollection({ user }: PhotosCollectionProps) {
     setIsEditModalVisible(true);
   }
 
-  function deletePhoto(photoId: string) {
-    const newPhotos = photos.filter((photo) => photo.id !== photoId);
-    setPhotos(newPhotos);
-  }
-
   function validateModalVisibility(isShown: boolean, photoId: string) {
     return isShown && photoId === photoIdToEdit ? true : false;
   }
@@ -55,15 +43,21 @@ export function PhotosCollection({ user }: PhotosCollectionProps) {
   return (
     <View className="bg-white h-4/5">
       <Text className="font-main text-center text-xl my-5">My Photos</Text>
-      {photos.map((photo) => {
-        const isShown = validateModalVisibility(isEditModalVisible, photo.id);
-        return (
-          <React.Fragment key={photo.id}>
-            <CollectionsPhoto photo={photo} handleAction={handleAction} />
-            <EditModal title={photo.title} isShown={isShown} setVisibility={setIsEditModalVisible} />
-          </React.Fragment>
-        );
-      })}
+      <FlatList
+        className='mb-20 h-full'
+        ListFooterComponent={<View className='h-14'/>}
+        data={photos}
+        keyExtractor={(item)=>item.id}
+        renderItem={({ item }) => {
+          const isShown = validateModalVisibility(isEditModalVisible, item.id);
+          return (
+            <>
+              <CollectionsPhoto photo={item} handleAction={handleAction} />
+              <EditModal photo={item} isShown={isShown} setVisibility={setIsEditModalVisible} />
+            </>
+          );
+        }}
+      />
     </View>
   );
 }
