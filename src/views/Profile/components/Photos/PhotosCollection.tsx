@@ -1,9 +1,9 @@
 import { PhotoMock } from '@mocks';
 import { useStore } from '@zustandStore';
 import React, { useState } from 'react';
-import { FlatList, Text, View } from 'react-native';
-import { CollectionsPhoto } from './components';
-import { EditModal } from './components/EditModal';
+import { Alert, FlatList, Text, View } from 'react-native';
+import { CollectionsPhoto, EditModal, PhotoPreview } from './components';
+import { usePhotoPreview } from './hooks';
 
 export interface HandleAction {
   action: string;
@@ -13,6 +13,7 @@ export interface HandleAction {
 export function PhotosCollection() {
   const [isEditModalVisible, setIsEditModalVisible] = useState(false);
   const [photoToEdit, setPhotoToEdit] = useState<PhotoMock | null>(null);
+  const {photoPreview, setPhotoPreview, isPreviewShown} = usePhotoPreview();
   const [photos, deletePhoto] = useStore((state) => [state.photos, state.deletePhoto]);
 
   function handleAction({ action, id, photo }: HandleAction) {
@@ -22,11 +23,11 @@ export function PhotosCollection() {
         break;
 
       case 'EDIT':
-        editPhoto(photo as PhotoMock);
+        onEditPress(photo as PhotoMock);
         break;
 
       case 'DELETE':
-        deletePhoto(id as string);
+        onDeletePress(id as string);
         break;
       default:
         break;
@@ -37,9 +38,25 @@ export function PhotosCollection() {
     console.log('shared');
   }
 
-  function editPhoto(photo: PhotoMock) {
+  function onDeletePress(photoId: string) {
+    Alert.alert(
+      'Confirm Delete',
+      'Are you sure you want to delete this photo?',
+      [
+        { text: 'yes', style: 'default', onPress: () => deletePhoto(photoId) },
+        { text: 'no', style: 'cancel' },
+      ],
+      { cancelable: true }
+    );
+  }
+
+  function onEditPress(photo: PhotoMock) {
     setPhotoToEdit(photo);
     setIsEditModalVisible(true);
+  }
+
+  function handlePreviewClose() {
+    setPhotoPreview(null);
   }
 
   return (
@@ -50,12 +67,23 @@ export function PhotosCollection() {
         ListFooterComponent={<View className="h-14" />}
         data={photos}
         keyExtractor={(item) => item.id}
-        renderItem={({ item }) => <CollectionsPhoto photo={item} handleAction={handleAction} />}
+        renderItem={({ item }) => (
+          <CollectionsPhoto
+            photo={item}
+            handleAction={handleAction}
+            showPreview={setPhotoPreview}
+          />
+        )}
       />
       <EditModal
         photo={photoToEdit}
         isShown={isEditModalVisible}
         setVisibility={setIsEditModalVisible}
+      />
+      <PhotoPreview
+        image={photoPreview}
+        showPreview={isPreviewShown}
+        handleClose={handlePreviewClose}
       />
     </View>
   );

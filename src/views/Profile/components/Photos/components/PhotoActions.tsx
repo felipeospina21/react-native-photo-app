@@ -1,49 +1,13 @@
-import deleteIcon from '@assets/icons/delete.png';
-import editIcon from '@assets/icons/editing.png';
-import shareIcon from '@assets/icons/share.png';
 import { PhotoMock } from '@mocks';
-import { useState } from 'react';
-import { Image, Pressable, Text, View, type ImageSourcePropType } from 'react-native';
+import { Image, Pressable, Text, View } from 'react-native';
 import type { HandleAction } from '../PhotosCollection'
+import { actions } from '../data'
 
 interface PhotoActionsProps {
   photo: PhotoMock;
   handleAction: ({ action, id, photo }: HandleAction)=>void
 }
-type Action = 'SHARE' | 'EDIT' | 'DELETE';
-interface Actions {
-  icon: ImageSourcePropType;
-  label: string;
-  hint: string;
-  text: string;
-  action: Action;
-}
-
 export function PhotoActions({ photo, handleAction }: PhotoActionsProps) {
-  const [actions] = useState<Actions[]>([
-    {
-      icon: shareIcon,
-      label: 'share image',
-      hint: 'click to share image',
-      text: 'share',
-      action: 'SHARE',
-    },
-    {
-      icon: editIcon,
-      label: 'edit image',
-      hint: 'click to edit image',
-      text: 'edit',
-      action: 'EDIT',
-    },
-    {
-      icon: deleteIcon,
-      label: 'delet image',
-      hint: 'click to delete image',
-      text: 'delete',
-      action: 'DELETE',
-    },
-  ]);
-
   return (
     <View className="flex-row justify-between w-4/5">
       {actions.map(({ icon, label, hint, text, action }, idx) => (
