@@ -12,6 +12,7 @@ export function CloseButton({ handleClose, color = 'black' }: CloseButtonProps) 
       onPress={handleClose}
       accessibilityLabel="close modal"
       accessibilityHint="click to close modal"
+      accessibilityRole='button'
     >
       <Text className="text-xl font-secondary_bold" style={{ color }}>
         X

@@ -16,6 +16,7 @@ export function PrimaryButton({ onPress, text, a11y }: PrimaryButtonProps) {
         className="flex-row items-center justify-center m-auto"
         accessible
         {...a11y}
+        accessibilityRole='button'
       >
         <Text className="font-secondary text-white text-lg">{text}</Text>
       </TouchableOpacity>
