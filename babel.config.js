@@ -17,6 +17,7 @@ module.exports = function (api) {
             '@mocks': './src/mocks/index',
             '@layouts': './src/layouts/index',
             '@utils': './src/utils/index',
+            '@test-utils': './src/test-utils/index',
             '@api': './src/api',
           },
         },

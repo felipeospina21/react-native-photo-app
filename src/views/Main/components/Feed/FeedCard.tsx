@@ -12,16 +12,16 @@ export function FeedCard({ data }: FeedCardProps) {
   return (
     <View className="bg-white py-2">
       <CardHeader
-        img={user.profile_image.small}
+        img={user.profile_image?.small ?? ''}
         name={user.name}
         createdAt={created_at}
-        userLocation = {user.location}
+        userLocation = {user.location ?? ''}
       />
       {imgDescription && <Text className="text-text-main text-lg mx-4 my-1">{imgDescription}</Text>}
       <View className="w-full h-60">
         <ImageBackground
           source={{
-            uri: urls.regular,
+            uri: urls?.regular,
           }}
           accessibilityIgnoresInvertColors
           className="h-full"

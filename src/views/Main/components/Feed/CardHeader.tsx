@@ -22,6 +22,8 @@ export function CardHeader({ img, name, createdAt, userLocation }: CardHeaderPro
             uri: img,
           }}
           accessibilityIgnoresInvertColors
+          accessibilityLabel='published photo'
+          accessibilityHint='published photo by user'
           className="h-full aspect-square"
           resizeMode="cover"
         />

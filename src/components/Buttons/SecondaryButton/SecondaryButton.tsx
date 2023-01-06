@@ -14,6 +14,7 @@ export function SecondaryButton({ onPress, text, a11y }: SecondaryButtonProps) {
       <TouchableOpacity
         onPress={onPress}
         className="flex-row items-center justify-center m-auto"
+        accessibilityRole='button'
         accessible
         {...a11y}
       >

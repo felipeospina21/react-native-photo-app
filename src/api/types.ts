@@ -7,18 +7,18 @@ type User = {
   id: string;
   username: string;
   name: string;
-  portfolio_url: string;
-  bio: string;
-  location: string;
-  total_likes: number;
-  total_photos: number;
-  total_collections: number;
-  profile_image: {
+  portfolio_url?: string;
+  bio?: string;
+  location?: string;
+  total_likes?: number;
+  total_photos?: number;
+  total_collections?: number;
+  profile_image?: {
     small: string;
     medium: string;
     large: string;
   };
-  links: Links & {
+  links?: Links & {
     photos: string;
     likes: string;
     portfolio: string;
@@ -126,7 +126,7 @@ export interface Photos {
   likes: number;
   liked_by_user: boolean;
   user: User;
-  current_user_collections: // The *current user's* collections that this photo belongs to.
+  current_user_collections?: // The *current user's* collections that this photo belongs to.
   {
     id: number;
     title: string;
@@ -136,8 +136,8 @@ export interface Photos {
     cover_photo: null | string;
     user: null | string;
   }[];
-  urls: Urls;
-  links: Links & {
+  urls?: Urls;
+  links?: Links & {
     download: string;
     download_location: string;
   };
